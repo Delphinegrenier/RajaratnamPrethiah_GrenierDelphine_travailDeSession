@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+</head>
+
+<body>
+  <div class="container">
+  
+    <h1>Connexion</h1>
+    <form id="connexionForm">
+      <input type="text" name="identifiant" id="identifiant"  required
+        oninvalid="setCustomValidity('Veuillez inscrire un nom d\'utilisateur!')" oninput="setCustomValidity('')"
+        title="Veuillez inscrire votre nom d'utilisateur!" />
+      <input type="password" name="motdepasse" id="motdepasse" required pattern="^(?=.*\d).{8,}$" title="Le mot de passe doit contenir au moins 8 caractères et un chiffre." oninvalid="setCustomValidity('Veuillez inscrire un mot de passe!')" oninput="setCustomValidity('')"/>
+      <!-- Pattern mot de passe pris de : https://www.w3schools.com/howto/howto_js_password_validation.asp et Utilisation de setCustomValidity :https://developer.mozilla.org/en-US/docs/Web/API/HTMLObjectElement/setCustomValidity-->
+      <p class="caracteres" id="motdepasseInvalide">Vous devez avoir 8 caractères et au moins un chiffre</p>
+      
+      <button id="boutonConnexion" type="submit">Connexion</button>
+    </form>
+    <p id="nonMembre">Vous n'êtes pas membre? <a href="./page1.html">Abonnez-vous</a></p>
+    <div><img id="logo" src="./assets/logo.png" alt="logo"></div>
+  </div>
+  <script src="./page1.js"></script>
+</body>
+
+</html>
