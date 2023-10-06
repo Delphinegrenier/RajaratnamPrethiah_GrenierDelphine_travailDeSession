@@ -5,7 +5,7 @@
   alert(alerteSondage);
 })();
 
-// Tableau contenant des questions et des options
+// Tableau contenant des questions et des options (tableau pour l'affichage des questions)
 let sondage = {
   base: {
     question: "Quelle base préférez-vous pour votre thé?",
@@ -131,6 +131,10 @@ let sondage = {
   },
 };
 
+// Définition d'une variable globale pour suivre l'étape actuelle du sondage
+let etapeActuelle = "base";
+
+// Fonction principale (fonction d'ordre supérieur) pour afficher les questions en fonction de la clé donnée
 function afficherQuestions(cle) {
   let questions = document.querySelector("h2");
   questions.innerText = sondage[cle].question;
@@ -146,7 +150,11 @@ function afficherQuestions(cle) {
   while (containerBoutons.firstChild) {
     containerBoutons.removeChild(containerBoutons.firstChild);
   }
-  // boucle qui crée des inputs pour chaque options à chaque nouvelle clé
+
+  // Variable pour suivre si une option a été sélectionnée
+  let optionSelectionnee = false;
+
+  // boucle qui crée des inputs pour chaque options à chaque nouvelle clé (Parcourir le tableau avec for ..in )
   for (let i in sondage[cle].options) {
     const nouveauLabel = document.createElement("label");
     nouveauLabel.innerText = sondage[cle].options[i].choix;
@@ -154,11 +162,21 @@ function afficherQuestions(cle) {
     nouveauInput.setAttribute("type", "radio");
     nouveauInput.setAttribute("name", "reponse");
 
+    // Marquer l'option comme sélectionnée lors du changement
+    nouveauInput.addEventListener("change", function () {
+      optionSelectionnee = true;
+    });
+
     inputs.appendChild(nouveauInput);
     inputs.appendChild(nouveauLabel);
   }
 
-  // boucle qui crée un bouton pour chaque clé avec une destination
+  // Créer un bouton "Continuer"
+  const continuerBtn = document.createElement("button");
+  continuerBtn.textContent = "Continuer";
+
+  /* Code Delphine pour l'affichage des boutons
+  boucle qui crée un bouton pour chaque clé avec une destination
   for (let i = 0; i < sondage[cle].bouton.length; i++) {
     const nouveauBtn = document.createElement("button");
 
@@ -178,4 +196,31 @@ function afficherQuestions(cle) {
     }
   }
 }
-afficherQuestions("base");
+afficherQuestions("base");*/
+
+//Voici le code qui à été modifié (fonction de fermeture)
+  // Ajouter un gestionnaire d'événements au bouton "Continuer"
+  continuerBtn.addEventListener("click", function () {
+    if (!optionSelectionnee) {
+      // Si aucune option que l'utilisateur n'a été sélectionnée cela affiche une alerte
+      alert("Veuillez sélectionner une option avant de continuer.");
+    } else {
+      // Si une option a été sélectionnée par l'utilisateur
+      if (cle === "frequence") {
+        // Si c'est la dernière question, redirige vers la dernière page qui est la page html4 après un délai 2 secondes
+        setTimeout(function () {
+          window.location.href = "page4.html";
+        }, 2000);
+      } else {
+        // Sinon, passer à la question suivante si l'utilsateur à sélectionné une option
+        etapeActuelle = cle;
+        afficherQuestions(sondage[cle].bouton[0].destination);
+      }
+    }
+  });
+
+  // Ajouter le bouton "Continuer"
+  containerBoutons.appendChild(continuerBtn);
+}
+//Affiche les questions...
+afficherQuestions(etapeActuelle);
