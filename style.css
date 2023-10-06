@@ -203,3 +203,16 @@ p.caracteres {
     margin: 0;
     position: relative;
 }
+
+/* Sondage inputs */
+.barreoptions {
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.barreoptions input {
+    background-color: blue;
+}
