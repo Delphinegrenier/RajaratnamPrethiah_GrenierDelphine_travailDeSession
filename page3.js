@@ -9,7 +9,6 @@
 let sondage = {
   base: {
     question: "Quelle base préférez-vous pour votre thé?",
-    type: "choixsimple",
     options: [
       {
         choix: "Thé",
@@ -21,16 +20,10 @@ let sondage = {
         choix: "Jus",
       },
     ],
-    bouton: [
-      {
-        destination: "garniture",
-        titre: "Continuer",
-      },
-    ],
+    destination: "garniture",
   },
   garniture: {
     question: "Quelles garnitures ajoutez-vous à votre boisson?",
-    type: "choixmultiple",
     options: [
       {
         choix: "Perles de tapioca",
@@ -48,16 +41,10 @@ let sondage = {
         choix: "Aucune garniture",
       },
     ],
-    bouton: [
-      {
-        destination: "taille",
-        titre: "Continuer",
-      },
-    ],
+    destination: "taille",
   },
   taille: {
     question: "Généralement, quelle taille de boisson commandez-vous?",
-    type: "choixsimple",
     options: [
       {
         choix: "Petit",
@@ -69,17 +56,11 @@ let sondage = {
         choix: "Grand",
       },
     ],
-    bouton: [
-      {
-        destination: "sucre",
-        titre: "Continuer",
-      },
-    ],
+    destination: "sucre",
   },
 
   sucre: {
     question: "Quel niveau de sucre choisissez-vous?",
-    type: "choixsimple",
     options: [
       {
         choix: "100%",
@@ -97,17 +78,11 @@ let sondage = {
         choix: "0%",
       },
     ],
-    bouton: [
-      {
-        destination: "frequence",
-        titre: "Continuer",
-      },
-    ],
+    destination: "frequence"
   },
   frequence: {
     question:
       "À quelle fréquence consommez-vous des boissons de type thé aux perles hebdomadairement?",
-    type: "inputtexte",
     options: [
       {
         choix: "Une fois",
@@ -122,12 +97,7 @@ let sondage = {
         choix: "6+",
       },
     ],
-    bouton: [
-      {
-        destination: "null",
-        titre: "Envoyer",
-      },
-    ],
+    destination: null,
   },
 };
 
@@ -214,7 +184,7 @@ afficherQuestions("base");*/
       } else {
         // Sinon, passer à la question suivante si l'utilsateur à sélectionné une option
         etapeActuelle = cle;
-        afficherQuestions(sondage[cle].bouton[0].destination);
+        afficherQuestions(sondage[cle].destination);
       }
     }
   });
@@ -224,3 +194,7 @@ afficherQuestions("base");*/
 }
 //Affiche les questions...
 afficherQuestions(etapeActuelle);
+
+
+//remplacer bouton par destination et enlever tableau pour une simple option. 
+// enlever la propriété type dans l'objet "sondage", car aucune utilisation pour l'instant.
