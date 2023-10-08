@@ -124,12 +124,12 @@ function afficherQuestions(cle) {
   const inputs = document.querySelector(".barreoptions");
   let containerBoutons = document.querySelector(".containerBoutons");
 
-  // Le while enleve les inputs pour ne pas qu'ils se dupliques
+  // Le while enleve les inputs pour ne pas qu'ils se dupliquent
   while (inputs.firstChild) {
     inputs.removeChild(inputs.firstChild);
   }
 
-  // Le while enleve les boutons pour ne pas qu'ils se dupliques
+  // Le while enleve les boutons pour ne pas qu'ils se dupliquent
   while (containerBoutons.firstChild) {
     containerBoutons.removeChild(containerBoutons.firstChild);
   }
@@ -179,7 +179,7 @@ function afficherQuestions(cle) {
   });
   containerBoutons.appendChild(continuerBtn);
 }
-// L'étape qui afiche les questions sur la page web
+// L'étape qui affiche les questions sur la page web
 afficherQuestions(etapeActuelle);
 
 // Remplacer bouton par destination et enlever tableau pour une simple option.
