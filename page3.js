@@ -63,19 +63,19 @@ let sondage = {
     question: "Quel niveau de sucre choisissez-vous?",
     options: [
       {
-        choix: "100%",
-      },
-      {
-        choix: "75%",
-      },
-      {
-        choix: "50%",
+        choix: "0%",
       },
       {
         choix: "25%",
       },
       {
-        choix: "0%",
+        choix: "50%",
+      },
+      {
+        choix: "75%",
+      },
+      {
+        choix: "100%",
       },
     ],
     destination: "frequence"
@@ -131,14 +131,17 @@ function afficherQuestions(cle) {
     const nouveauInput = document.createElement("input");
     nouveauInput.setAttribute("type", "radio");
     nouveauInput.setAttribute("name", "reponse");
+    const nouveauDiv = document.createElement("div");
+    nouveauDiv.setAttribute("class", "containeroptions");
 
     // Marquer l'option comme sélectionnée lors du changement
     nouveauInput.addEventListener("change", function () {
       optionSelectionnee = true;
     });
 
-    inputs.appendChild(nouveauInput);
-    inputs.appendChild(nouveauLabel);
+    nouveauDiv.appendChild(nouveauLabel);
+    nouveauDiv.appendChild(nouveauInput);
+    inputs.appendChild(nouveauDiv);
   }
 
   // Créer un bouton "Continuer"
@@ -174,18 +177,18 @@ afficherQuestions("base");*/
     if (!optionSelectionnee) {
       // Si aucune option que l'utilisateur n'a été sélectionnée cela affiche une alerte
       alert("Veuillez sélectionner une option avant de continuer.");
-    } else {
+    } else if (cle === "frequence") {
       // Si une option a été sélectionnée par l'utilisateur
-      if (cle === "frequence") {
         // Si c'est la dernière question, redirige vers la dernière page qui est la page html4 après un délai 2 secondes
         setTimeout(function () {
           window.location.href = "page4.html";
         }, 2000);
+        questionRemplies.textContent = `Sondage terminé !`;
       } else {
         // Sinon, passer à la question suivante si l'utilsateur à sélectionné une option
         etapeActuelle = cle;
         afficherQuestions(sondage[cle].destination);
-      }
+        incrementerCompteur();
     }
   });
 
@@ -198,3 +201,15 @@ afficherQuestions(etapeActuelle);
 
 //remplacer bouton par destination et enlever tableau pour une simple option. 
 // enlever la propriété type dans l'objet "sondage", car aucune utilisation pour l'instant.
+
+//création d'un compteur - autre fonction de fermeture 
+let questionRemplies = document.querySelector("p");
+questionRemplies.textContent = `Questions: 0/5`;
+let compteur = function() {
+  let nombreQuestion = 0;
+  return function() {
+    nombreQuestion++;
+    questionRemplies.textContent = `Questions: ${nombreQuestion}/5`;
+  }
+}
+let incrementerCompteur = compteur();

@@ -205,14 +205,19 @@ p.caracteres {
 }
 
 /* Sondage inputs */
+
 .barreoptions {
+    margin-top: 20px;
     display: flex;
-    text-align: center;
     justify-content: space-around;
-    width: 100%;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .barreoptions input {
-    background-color: blue;
+    accent-color: black;
+}
+
+.containeroptions {
+    padding-left: 3px
 }
