@@ -5,8 +5,10 @@
   alert(alerteSondage);
 })();
 
-// Tableau contenant des questions et des options (tableau pour l'affichage des questions)
+// Tableau contenant des questions et des options (objet et tableau pour l'affichage des questions)
 let sondage = {
+  //Question 1: Quelle base préférez-vous pour votre thé? (Choix simple : Thé, Lait, Jus)
+
   base: {
     question: "Quelle base préférez-vous pour votre thé?",
     options: [
@@ -22,6 +24,9 @@ let sondage = {
     ],
     destination: "garniture",
   },
+
+  //Question 2: Quelles garnitures ajoutez-vous à votre boisson? (Choix multiple : Perles de tapioca, Perles éclatantes, Morceaux de fruits, Haricots, Aucune garniture)
+
   garniture: {
     question: "Quelles garnitures ajoutez-vous à votre boisson?",
     options: [
@@ -43,6 +48,9 @@ let sondage = {
     ],
     destination: "taille",
   },
+
+  //Question 3: Généralement, quelle taille de boisson commandez-vous? (Choix simple : Petit, Moyen, Grand)
+
   taille: {
     question: "Généralement, quelle taille de boisson commandez-vous?",
     options: [
@@ -58,6 +66,8 @@ let sondage = {
     ],
     destination: "sucre",
   },
+
+  //Question 4: Quel niveau de sucre choisissez-vous? (Choix simple ou input texte : 100%, 75%, 50%, 25%, 0%)
 
   sucre: {
     question: "Quel niveau de sucre choisissez-vous?",
@@ -78,8 +88,11 @@ let sondage = {
         choix: "100%",
       },
     ],
-    destination: "frequence"
+    destination: "frequence",
   },
+
+  //Question 5: À quelle fréquence consommez-vous des boissons de type thé aux perles hebdomadairement? (Input texte ou menu défilant : de 0 à 10+)
+
   frequence: {
     question:
       "À quelle fréquence consommez-vous des boissons de type thé aux perles hebdomadairement?",
@@ -111,12 +124,12 @@ function afficherQuestions(cle) {
   const inputs = document.querySelector(".barreoptions");
   let containerBoutons = document.querySelector(".containerBoutons");
 
-  // enleve les inputs pour ne pas qu'ils se dupliques
+  // Le while enleve les inputs pour ne pas qu'ils se dupliques
   while (inputs.firstChild) {
     inputs.removeChild(inputs.firstChild);
   }
 
-  // enleve les boutons pour ne pas qu'ils se dupliques
+  // Le while enleve les boutons pour ne pas qu'ils se dupliques
   while (containerBoutons.firstChild) {
     containerBoutons.removeChild(containerBoutons.firstChild);
   }
@@ -124,7 +137,7 @@ function afficherQuestions(cle) {
   // Variable pour suivre si une option a été sélectionnée
   let optionSelectionnee = false;
 
-  // boucle qui crée des inputs pour chaque options à chaque nouvelle clé (Parcourir le tableau avec for ..in )
+  // Une boucle qui crée des inputs pour chaque options à chaque nouvelle clé (Parcourir le tableau avec for ..in )
   for (let i in sondage[cle].options) {
     const nouveauLabel = document.createElement("label");
     nouveauLabel.innerText = sondage[cle].options[i].choix;
@@ -144,72 +157,43 @@ function afficherQuestions(cle) {
     inputs.appendChild(nouveauDiv);
   }
 
-  // Créer un bouton "Continuer"
+  // Crée un bouton Continuer pour permettre l'utilisateur de passer à la question suivante
   const continuerBtn = document.createElement("button");
   continuerBtn.textContent = "Continuer";
 
-  /* Code Delphine pour l'affichage des boutons
-  boucle qui crée un bouton pour chaque clé avec une destination
-  for (let i = 0; i < sondage[cle].bouton.length; i++) {
-    const nouveauBtn = document.createElement("button");
-
-    nouveauBtn.textContent = sondage[cle].bouton[i].titre;
-    containerBoutons.appendChild(nouveauBtn);
-    if (cle === "frequence") {
-      nouveauBtn.addEventListener("click", function (event) {
-        event.preventDefault();
-        setTimeout(function () {
-          window.location.href = "page4.html";
-        }, 2000);
-      });
-    } else {
-      nouveauBtn.addEventListener("click", () => {
-        afficherQuestions(sondage[cle].bouton[i].destination);
-      });
-    }
-  }
-}
-afficherQuestions("base");*/
-
-//Voici le code qui à été modifié (fonction de fermeture)
-  // Ajouter un gestionnaire d'événements au bouton "Continuer"
+  // Ajouter un gestionnaire d'événements au bouton "Continuer" (fonction de fermeture)
   continuerBtn.addEventListener("click", function () {
     if (!optionSelectionnee) {
-      // Si aucune option que l'utilisateur n'a été sélectionnée cela affiche une alerte
       alert("Veuillez sélectionner une option avant de continuer.");
     } else if (cle === "frequence") {
-      // Si une option a été sélectionnée par l'utilisateur
-        // Si c'est la dernière question, redirige vers la dernière page qui est la page html4 après un délai 2 secondes
-        setTimeout(function () {
-          window.location.href = "page4.html";
-        }, 2000);
-        questionRemplies.textContent = `Sondage terminé !`;
-      } else {
-        // Sinon, passer à la question suivante si l'utilsateur à sélectionné une option
-        etapeActuelle = cle;
-        afficherQuestions(sondage[cle].destination);
-        incrementerCompteur();
+      // Si c'est la dernière question, redirige vers la dernière page qui est la page html4 après un délai 2 secondes sinon elle passe à la question suivante si l'utilsateur à sélectionné une option
+      setTimeout(function () {
+        window.location.href = "page4.html";
+      }, 2000);
+      questionRemplies.textContent = `Sondage terminé !`;
+    } else {
+      etapeActuelle = cle;
+      afficherQuestions(sondage[cle].destination);
+      incrementerCompteur();
     }
   });
-
-  // Ajouter le bouton "Continuer"
   containerBoutons.appendChild(continuerBtn);
 }
-//Affiche les questions...
+// L'étape qui afiche les questions sur la page web
 afficherQuestions(etapeActuelle);
 
+// Remplacer bouton par destination et enlever tableau pour une simple option.
+// Enlever la propriété type dans l'objet "sondage", car aucune utilisation pour l'instant.
 
-//remplacer bouton par destination et enlever tableau pour une simple option. 
-// enlever la propriété type dans l'objet "sondage", car aucune utilisation pour l'instant.
-
-//création d'un compteur - autre fonction de fermeture 
+//Création d'un compteur (une fonction de fermeture)
 let questionRemplies = document.querySelector("p");
 questionRemplies.textContent = `Questions: 0/5`;
-let compteur = function() {
+//Création d'un compteur qui permet à l'utilsateur de savoir à quel question il se situe
+let compteur = function () {
   let nombreQuestion = 0;
-  return function() {
+  return function () {
     nombreQuestion++;
     questionRemplies.textContent = `Questions: ${nombreQuestion}/5`;
-  }
-}
+  };
+};
 let incrementerCompteur = compteur();

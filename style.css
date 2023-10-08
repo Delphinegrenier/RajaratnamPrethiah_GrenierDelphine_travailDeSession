@@ -50,6 +50,44 @@ div.containerDeux {
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
+div.containerTrois {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 800px;
+    height: 600px;
+    margin: auto;
+    background-color: rgb(235, 241, 233);
+    border: 3px #8EAC8E solid;
+    backdrop-filter: blur(50px);
+    border-radius: 15px;
+    box-sizing: border-box;
+    padding: 0 40px;
+    color: black;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+div.containerQuatre {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 800px;
+    height: 600px;
+    margin: auto;
+    background-color: rgb(235, 241, 233);
+    border: 3px #8EAC8E solid;
+    backdrop-filter: blur(50px);
+    border-radius: 15px;
+    box-sizing: border-box;
+    padding: 0 40px;
+    color: black;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
 .containerInformations {
     display: flex;
     flex-direction: column;
@@ -221,3 +259,4 @@ p.caracteres {
 .containeroptions {
     padding-left: 3px
 }
+
