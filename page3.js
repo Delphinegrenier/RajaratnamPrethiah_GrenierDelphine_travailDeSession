@@ -182,9 +182,6 @@ function afficherQuestions(cle) {
 // L'étape qui affiche les questions sur la page web
 afficherQuestions(etapeActuelle);
 
-// Remplacer bouton par destination et enlever tableau pour une simple option.
-// Enlever la propriété type dans l'objet "sondage", car aucune utilisation pour l'instant.
-
 //Création d'un compteur (une fonction de fermeture)
 let questionRemplies = document.querySelector("p");
 questionRemplies.textContent = `Questions: 0/5`;
