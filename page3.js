@@ -117,7 +117,7 @@ let sondage = {
 // Définition d'une variable globale pour suivre l'étape actuelle du sondage
 let etapeActuelle = "base";
 
-// Fonction principale (fonction d'ordre supérieur) pour afficher les questions en fonction de la clé donnée
+// Fonction principale pour afficher les questions en fonction de la clé donnée
 function afficherQuestions(cle) {
   let questions = document.querySelector("h2");
   questions.innerText = sondage[cle].question;
@@ -147,7 +147,7 @@ function afficherQuestions(cle) {
     const nouveauDiv = document.createElement("div");
     nouveauDiv.setAttribute("class", "containeroptions");
 
-    // Marquer l'option comme sélectionnée lors du changement
+    // Marquer l'option comme sélectionnée lors du changement (fonction d'ordre supérieur)
     nouveauInput.addEventListener("change", function () {
       optionSelectionnee = true;
     });
@@ -161,10 +161,20 @@ function afficherQuestions(cle) {
   const continuerBtn = document.createElement("button");
   continuerBtn.textContent = "Continuer";
 
-  // Ajouter un gestionnaire d'événements au bouton "Continuer" (fonction de fermeture)
+  // Ajouter un gestionnaire d'événements au bouton "Continuer"
   continuerBtn.addEventListener("click", function () {
     if (!optionSelectionnee) {
-      alert("Veuillez sélectionner une option avant de continuer.");
+      //(fonction d'ordre supérieur pour afficher une alerte et un message)
+      function afficherAlerte(message, fonctionAlerte) {
+        let monMessage = `Veuillez sélectionner ${message} avant de continuer`;
+        fonctionAlerte(monMessage);
+      }
+
+      function alerte(message) {
+        alert(message);
+      }
+
+      afficherAlerte("une option", alerte);
     } else if (cle === "frequence") {
       // Si c'est la dernière question, redirige vers la dernière page qui est la page html4 après un délai 2 secondes sinon elle passe à la question suivante si l'utilsateur à sélectionné une option
       setTimeout(function () {
