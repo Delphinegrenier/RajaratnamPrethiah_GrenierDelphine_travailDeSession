@@ -7,109 +7,44 @@
 
 // Tableau contenant des questions et des options (objet et tableau pour l'affichage des questions)
 let sondage = {
-  //Question 1: Quelle base préférez-vous pour votre thé? (Choix simple : Thé, Lait, Jus)
+  //Question 1: Quelle base préférez-vous pour votre thé? (Thé, Lait, Jus)
 
   base: {
     question: "Quelle base préférez-vous pour votre thé?",
-    options: [
-      {
-        choix: "Thé",
-      },
-      {
-        choix: "Lait",
-      },
-      {
-        choix: "Jus",
-      },
-    ],
+    options: ["Thé", "Lait", "Jus"],
     destination: "garniture",
   },
 
-  //Question 2: Quelles garnitures ajoutez-vous à votre boisson? (Choix multiple : Perles de tapioca, Perles éclatantes, Morceaux de fruits, Haricots, Aucune garniture)
+  //Question 2: Quelles garnitures ajoutez-vous à votre boisson? (Perles de tapioca, Perles éclatantes, Morceaux de fruits, Haricots, Aucune garniture)
 
   garniture: {
     question: "Quelles garnitures ajoutez-vous à votre boisson?",
-    options: [
-      {
-        choix: "Perles de tapioca",
-      },
-      {
-        choix: "Perles éclatantes",
-      },
-      {
-        choix: "Morceaux de fruits",
-      },
-      {
-        choix: "Haricots",
-      },
-      {
-        choix: "Aucune garniture",
-      },
-    ],
+    options: ["Perles de tapioca", "Perles éclatantes", "Morceaux de fruits", "Haricots", "Aucune garniture"],
     destination: "taille",
   },
 
-  //Question 3: Généralement, quelle taille de boisson commandez-vous? (Choix simple : Petit, Moyen, Grand)
+  //Question 3: Généralement, quelle taille de boisson commandez-vous? (Petit, Moyen, Grand)
 
   taille: {
     question: "Généralement, quelle taille de boisson commandez-vous?",
-    options: [
-      {
-        choix: "Petit",
-      },
-      {
-        choix: "Moyen",
-      },
-      {
-        choix: "Grand",
-      },
-    ],
+    options: ["Petit", "Moyen", "Grand"],
     destination: "sucre",
   },
 
-  //Question 4: Quel niveau de sucre choisissez-vous? (Choix simple ou input texte : 100%, 75%, 50%, 25%, 0%)
+  //Question 4: Quel niveau de sucre choisissez-vous? (100%, 75%, 50%, 25%, 0%)
 
   sucre: {
     question: "Quel niveau de sucre choisissez-vous?",
-    options: [
-      {
-        choix: "0%",
-      },
-      {
-        choix: "25%",
-      },
-      {
-        choix: "50%",
-      },
-      {
-        choix: "75%",
-      },
-      {
-        choix: "100%",
-      },
-    ],
+    options: ["0%", "25%", "50%", "75%", "100%"],
     destination: "frequence",
   },
 
-  //Question 5: À quelle fréquence consommez-vous des boissons de type thé aux perles hebdomadairement? (Input texte ou menu défilant : de 0 à 10+)
+  //Question 5: À quelle fréquence consommez-vous des boissons de type thé aux perles hebdomadairement? (de 0 à 10+)
 
   frequence: {
     question:
       "À quelle fréquence consommez-vous des boissons de type thé aux perles hebdomadairement?",
-    options: [
-      {
-        choix: "Une fois",
-      },
-      {
-        choix: "2-3 fois",
-      },
-      {
-        choix: "4-5 fois",
-      },
-      {
-        choix: "6+",
-      },
-    ],
+    options: ["0", "1-2", "3-4", "5-6", "7+"],
     destination: null,
   },
 };
@@ -140,7 +75,7 @@ function afficherQuestions(cle) {
   // Une boucle qui crée des inputs pour chaque options à chaque nouvelle clé (Parcourir le tableau avec for ..in )
   for (let i in sondage[cle].options) {
     const nouveauLabel = document.createElement("label");
-    nouveauLabel.innerText = sondage[cle].options[i].choix;
+    nouveauLabel.innerText = sondage[cle].options[i];
     const nouveauInput = document.createElement("input");
     nouveauInput.setAttribute("type", "radio");
     nouveauInput.setAttribute("name", "reponse");
