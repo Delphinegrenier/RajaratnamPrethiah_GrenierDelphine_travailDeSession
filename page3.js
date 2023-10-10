@@ -5,7 +5,7 @@
   alert(alerteSondage);
 })();
 
-// Tableau contenant des questions et des options (objet et tableau pour l'affichage des questions)
+// Tableau contenant des questions et des options (objets et tableau pour l'affichage des questions)
 let sondage = {
   //Question 1: Quelle base préférez-vous pour votre thé? (Thé, Lait, Jus)
 
@@ -19,7 +19,13 @@ let sondage = {
 
   garniture: {
     question: "Quelles garnitures ajoutez-vous à votre boisson?",
-    options: ["Perles de tapioca", "Perles éclatantes", "Morceaux de fruits", "Haricots", "Aucune garniture"],
+    options: [
+      "Perles de tapioca",
+      "Perles éclatantes",
+      "Morceaux de fruits",
+      "Haricots",
+      "Aucune garniture",
+    ],
     destination: "taille",
   },
 
@@ -82,7 +88,7 @@ function afficherQuestions(cle) {
     const nouveauDiv = document.createElement("div");
     nouveauDiv.setAttribute("class", "containeroptions");
 
-    // Marquer l'option comme sélectionnée lors du changement (fonction d'ordre supérieur)
+    // Marquer l'option comme sélectionnée lors du changement
     nouveauInput.addEventListener("change", function () {
       optionSelectionnee = true;
     });

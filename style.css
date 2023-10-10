@@ -103,18 +103,21 @@ div.containerQuatre {
     justify-content:center;
     width: 50%;
     position: relative;
+    top: 50px;
 }
 
-.containerImage img {
+.containerImage img:nth-child(1) {
     rotate: -25deg;
     padding-bottom: 40px;
+    width: 60%;
 }
 .containerImage img:nth-child(2) {
     position: absolute;
     padding-bottom: 40px;
     z-index: -1;
-    top: 100px;
-    height: 80%;
+    width: 150%;
+    bottom: -75px;
+    
 }
 
 .containerBouton {
