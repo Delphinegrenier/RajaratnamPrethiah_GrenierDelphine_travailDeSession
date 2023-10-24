@@ -29,7 +29,6 @@ let utilisateurStr = JSON.stringify(nouvUtilisateur);
 localStorage.setItem('monUtilisateur', utilisateurStr);
 
   event.preventDefault(); // Empêche le formulaire de se soumettre normalement
-  alert("Bonjour " + valeurID);
   // Envoyer le formulaire après 2 secondes
     setTimeout(function () {
       window.location.href = "page2.html";
