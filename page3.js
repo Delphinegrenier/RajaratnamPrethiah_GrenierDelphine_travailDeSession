@@ -5,55 +5,40 @@
   alert(alerteSondage);
 })();
 
-// Tableau contenant des questions et des options (objets et tableau pour l'affichage des questions)
-let sondage = {
-  //Question 1: Quelle base préférez-vous pour votre thé? (Thé, Lait, Jus)
+//Création de classes créer un gabarit des informations des questions
+class QuestionSansReponse {
+  constructor(question, options) {
+    this.question = question;
+    this.options = options;
+  }
+}
+class Question extends QuestionSansReponse {
+  constructor(question, options, destination) {
+    super(question, options);
+    this.destination = destination;
+  }
+}
 
-  base: {
-    question: "Quelle base préférez-vous pour votre thé?",
-    options: ["Thé", "Lait", "Jus"],
-    destination: "garniture",
-  },
+//Instances des classes Sondage et SondageSansDestination avec les questions, réponses et destinations
+const base = new Question("Quelle base préférez-vous pour votre thé?", ["Thé", "Lait", "Jus"], "garniture");
+const garniture = new Question("Quelles garnitures ajoutez-vous à votre boisson?", ["Perles de tapioca", "Perles éclatantes", "Morceaux de fruits", "Haricots", "Aucune garniture"], "taille");
+const taille = new Question("Généralement, quelle taille de boisson commandez-vous?", ["Petit", "Moyen", "Grand"], "sucre");
+const sucre = new Question("Quel niveau de sucre choisissez-vous?", ["0%", "25%", "50%", "75%", "100%"], "frequence");
+const frequence = new QuestionSansReponse("À quelle fréquence consommez-vous des boissons de type thé aux perles hebdomadairement?", ["0", "1-2", "3-4", "5-6", "7+"]);
 
-  //Question 2: Quelles garnitures ajoutez-vous à votre boisson? (Perles de tapioca, Perles éclatantes, Morceaux de fruits, Haricots, Aucune garniture)
-
-  garniture: {
-    question: "Quelles garnitures ajoutez-vous à votre boisson?",
-    options: [
-      "Perles de tapioca",
-      "Perles éclatantes",
-      "Morceaux de fruits",
-      "Haricots",
-      "Aucune garniture",
-    ],
-    destination: "taille",
-  },
-
-  //Question 3: Généralement, quelle taille de boisson commandez-vous? (Petit, Moyen, Grand)
-
-  taille: {
-    question: "Généralement, quelle taille de boisson commandez-vous?",
-    options: ["Petit", "Moyen", "Grand"],
-    destination: "sucre",
-  },
-
-  //Question 4: Quel niveau de sucre choisissez-vous? (100%, 75%, 50%, 25%, 0%)
-
-  sucre: {
-    question: "Quel niveau de sucre choisissez-vous?",
-    options: ["0%", "25%", "50%", "75%", "100%"],
-    destination: "frequence",
-  },
-
-  //Question 5: À quelle fréquence consommez-vous des boissons de type thé aux perles hebdomadairement? (de 0 à 10+)
-
-  frequence: {
-    question:
-      "À quelle fréquence consommez-vous des boissons de type thé aux perles hebdomadairement?",
-    options: ["0", "1-2", "3-4", "5-6", "7+"],
-    destination: null,
-  },
+//Création de l'objet monSondage qui stock les instances
+let monSondage = {
+  base,
+  garniture,
+  taille,
+  sucre,
+  frequence
 };
+
+
+//Stockage des données de l'objet utilisateur
+let sondageStr = JSON.stringify(monSondage);
+localStorage.setItem('monSondage', sondageStr)
 
 // Définition d'une variable globale pour suivre l'étape actuelle du sondage
 let etapeActuelle = "base";
@@ -61,7 +46,7 @@ let etapeActuelle = "base";
 // Fonction principale pour afficher les questions en fonction de la clé donnée
 function afficherQuestions(cle) {
   let questions = document.querySelector("h2");
-  questions.innerText = sondage[cle].question;
+  questions.innerText = monSondage[cle].question;
   const inputs = document.querySelector(".barreoptions");
   let containerBoutons = document.querySelector(".containerBoutons");
 
@@ -79,9 +64,9 @@ function afficherQuestions(cle) {
   let optionSelectionnee = false;
 
   // Une boucle qui crée des inputs pour chaque options à chaque nouvelle clé (Parcourir le tableau avec for ..in )
-  for (let i in sondage[cle].options) {
+  for (let i in monSondage[cle].options) {
     const nouveauLabel = document.createElement("label");
-    nouveauLabel.innerText = sondage[cle].options[i];
+    nouveauLabel.innerText = monSondage[cle].options[i];
     const nouveauInput = document.createElement("input");
     nouveauInput.setAttribute("type", "radio");
     nouveauInput.setAttribute("name", "reponse");
@@ -124,7 +109,7 @@ function afficherQuestions(cle) {
       questionRemplies.textContent = `Sondage terminé !`;
     } else {
       etapeActuelle = cle;
-      afficherQuestions(sondage[cle].destination);
+      afficherQuestions(monSondage[cle].destination);
       incrementerCompteur();
     }
   });
