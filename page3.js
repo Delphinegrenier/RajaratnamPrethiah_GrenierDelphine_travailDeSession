@@ -6,13 +6,18 @@
 })();
 
 //Création de classes créer un gabarit des informations des questions
-class QuestionSansReponse {
+class DerniereQuestion {
   constructor(question, options) {
     this.question = question;
     this.options = options;
+    this.reponse = null;
+  }
+
+  repondre(reponse) {
+    this.reponse = reponse;
   }
 }
-class Question extends QuestionSansReponse {
+class Question extends DerniereQuestion {
   constructor(question, options, destination) {
     super(question, options);
     this.destination = destination;
@@ -20,11 +25,36 @@ class Question extends QuestionSansReponse {
 }
 
 //Instances des classes Sondage et SondageSansDestination avec les questions, réponses et destinations
-const base = new Question("Quelle base préférez-vous pour votre thé?", ["Thé", "Lait", "Jus"], "garniture");
-const garniture = new Question("Quelles garnitures ajoutez-vous à votre boisson?", ["Perles de tapioca", "Perles éclatantes", "Morceaux de fruits", "Haricots", "Aucune garniture"], "taille");
-const taille = new Question("Généralement, quelle taille de boisson commandez-vous?", ["Petit", "Moyen", "Grand"], "sucre");
-const sucre = new Question("Quel niveau de sucre choisissez-vous?", ["0%", "25%", "50%", "75%", "100%"], "frequence");
-const frequence = new QuestionSansReponse("À quelle fréquence consommez-vous des boissons de type thé aux perles hebdomadairement?", ["0", "1-2", "3-4", "5-6", "7+"]);
+const base = new Question(
+  "Quelle base préférez-vous pour votre thé?",
+  ["Thé", "Lait", "Jus"],
+  "garniture"
+);
+const garniture = new Question(
+  "Quelles garnitures ajoutez-vous à votre boisson?",
+  [
+    "Perles de tapioca",
+    "Perles éclatantes",
+    "Morceaux de fruits",
+    "Haricots",
+    "Aucune garniture",
+  ],
+  "taille"
+);
+const taille = new Question(
+  "Généralement, quelle taille de boisson commandez-vous?",
+  ["Petit", "Moyen", "Grand"],
+  "sucre"
+);
+const sucre = new Question(
+  "Quel niveau de sucre choisissez-vous?",
+  ["0%", "25%", "50%", "75%", "100%"],
+  "frequence"
+);
+const frequence = new DerniereQuestion(
+  "À quelle fréquence consommez-vous des boissons de type thé aux perles hebdomadairement?",
+  ["0", "1-2", "3-4", "5-6", "7+"]
+);
 
 //Création de l'objet monSondage qui stock les instances
 let monSondage = {
@@ -32,13 +62,12 @@ let monSondage = {
   garniture,
   taille,
   sucre,
-  frequence
+  frequence,
 };
-
 
 //Stockage des données de l'objet utilisateur
 let sondageStr = JSON.stringify(monSondage);
-localStorage.setItem('monSondage', sondageStr)
+localStorage.setItem("monSondage", sondageStr);
 
 // Définition d'une variable globale pour suivre l'étape actuelle du sondage
 let etapeActuelle = "base";
@@ -62,6 +91,7 @@ function afficherQuestions(cle) {
 
   // Variable pour suivre si une option a été sélectionnée
   let optionSelectionnee = false;
+  let reponseChoisi = null;
 
   // Une boucle qui crée des inputs pour chaque options à chaque nouvelle clé (Parcourir le tableau avec for ..in )
   for (let i in monSondage[cle].options) {
@@ -70,12 +100,14 @@ function afficherQuestions(cle) {
     const nouveauInput = document.createElement("input");
     nouveauInput.setAttribute("type", "radio");
     nouveauInput.setAttribute("name", "reponse");
+    nouveauInput.setAttribute("value", monSondage[cle].options[i]);
     const nouveauDiv = document.createElement("div");
     nouveauDiv.setAttribute("class", "containeroptions");
 
     // Marquer l'option comme sélectionnée lors du changement
     nouveauInput.addEventListener("change", function () {
       optionSelectionnee = true;
+      reponseChoisi = nouveauInput.value;
     });
 
     nouveauDiv.appendChild(nouveauLabel);
@@ -107,10 +139,14 @@ function afficherQuestions(cle) {
         window.location.href = "page4.html";
       }, 2000);
       questionRemplies.textContent = `Sondage terminé !`;
+      monSondage[cle].repondre(reponseChoisi);
+      localStorage.setItem("monSondage", JSON.stringify(monSondage));
     } else {
       etapeActuelle = cle;
+      monSondage[cle].repondre(reponseChoisi);
       afficherQuestions(monSondage[cle].destination);
       incrementerCompteur();
+      localStorage.setItem("monSondage", JSON.stringify(monSondage));
     }
   });
   containerBoutons.appendChild(continuerBtn);
