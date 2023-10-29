@@ -10,7 +10,7 @@ class DerniereQuestion {
   constructor(question, options) {
     this.question = question;
     this.options = options;
-    this.reponse = null;
+    this.reponse = "null";
   }
 
   repondre(reponse) {
