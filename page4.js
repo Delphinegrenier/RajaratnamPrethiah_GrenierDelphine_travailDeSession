@@ -14,9 +14,7 @@ console.log("Sondage:", monSondageStocker);
 // Affichage des éléments stockés dans la page
 const salutationH2 = document.querySelector("#salutation");
 const choixUl = document.querySelector("#vosChoix");
-const nomNode = document.createTextNode(
-  "Nom de l'utilisateur : " + monUtiliStocker.ID
-);
+const nomNode = document.createTextNode(monUtiliStocker.ID);
 salutationH2.appendChild(nomNode);
 
 for (let item in monSondageStocker) {
