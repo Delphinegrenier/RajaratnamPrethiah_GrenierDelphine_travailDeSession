@@ -145,14 +145,14 @@ function afficherQuestions(cle) {
       }, 2000);
       questionRemplies.textContent = `Sondage terminé !`;
       monSondage[cle].repondre(reponseChoisie);
-      localStorage.setItem("monSondage", JSON.stringify(monSondage));
     } else {
       etapeActuelle = cle;
       monSondage[cle].repondre(reponseChoisie);
       afficherQuestions(monSondage[cle].destination);
       incrementerCompteur();
-      localStorage.setItem("monSondage", JSON.stringify(monSondage));
+
     }
+    localStorage.setItem("monSondage", JSON.stringify(monSondage));
   });
   containerBoutons.appendChild(continuerBtn);
 }
