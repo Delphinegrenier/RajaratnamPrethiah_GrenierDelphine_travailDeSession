@@ -19,16 +19,23 @@ salutationH2.appendChild(nomNode);
 
 for (let item in monSondageStocker) {
   const nouvLi = document.createElement("li");
-  const choixNode = document.createTextNode(
-    item + ": " + monSondageStocker[item].reponse
-  );
+  const choixNode = document.createTextNode("Votre choix de " + item + ": ");
+  const reponseEnGras = document.createElement("strong");
+  reponseEnGras.textContent = monSondageStocker[item].reponse;
   nouvLi.appendChild(choixNode);
+  nouvLi.appendChild(reponseEnGras);
   choixUl.appendChild(nouvLi);
 }
 
 //Affichage dans la console les réponses
-console.log(monSondageStocker.base.reponse);
-console.log(monSondageStocker.garniture.reponse);
-console.log(monSondageStocker.taille.reponse);
-console.log(monSondageStocker.sucre.reponse);
-console.log(monSondageStocker.frequence.reponse);
+console.log("Réponse à la question base:", monSondageStocker.base.reponse);
+console.log(
+  "Réponse à la question garniture:",
+  monSondageStocker.garniture.reponse
+);
+console.log("Réponse à la question taille:", monSondageStocker.taille.reponse);
+console.log("Réponse à la question sucre:", monSondageStocker.sucre.reponse);
+console.log(
+  "Réponse à la question frequence:",
+  monSondageStocker.frequence.reponse
+);
