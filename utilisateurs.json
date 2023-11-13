@@ -1,0 +1,6 @@
+{
+    "utilisateur" : [
+    {"login" : "MammouthP", "password" : "Mammouthpoilue1234", "prenom": "Mammouth", "nom" : "Poilu"},
+    {"login" : "DauphinP", "password" : "Dauphinpoilue5678", "prenom": "Dauphin", "nom" : "Poilu"}
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "sondage" : [
+        {"base" : "Lait", "garniture" : "Perles éclatantes", "taille" : "Petit", "sucre" : "0%", "frequence" : "1-2" },
+        {"base" : "Thé", "garniture" : "Haricots", "taille" : "Petit", "sucre" : "25%", "frequence" : "7+" },
+        {"base" : "Lait", "garniture" : "Haricots", "taille" : "Grand", "sucre" : "50%", "frequence" : "1-2" },
+        {"base" : "Jus", "garniture" : "Morceaux de fruits", "taille" : "Jus", "sucre" : "75%", "frequence" : "1-2" },
+        {"base" : "Jus", "garniture" : "Perles éclatantes", "taille" : "Moyen", "sucre" : "100%", "frequence" : "5-6" },
+        {"base" : "Lait", "garniture" : "Perles de tapioca", "taille" : "Moyen", "sucre" : "100%", "frequence" : "3-4" },
+        {"base" : "Thé", "garniture" : "Perles de tapioca", "taille" : "Grand", "sucre" : "100%", "frequence" : "3-4" },
+        {"base" : "Thé", "garniture" : "Morceaux de fruits", "taille" : "Grand", "sucre" : "75%", "frequence" : "1-2" },
+        {"base" : "Thé", "garniture" : "Morceaux de fruits", "taille" : "Jus", "sucre" : "25%", "frequence" : "1-2" },
+        {"base" : "Lait", "garniture" : "Aucune garniture", "taille" : "Jus", "sucre" : "0%", "frequence" : "0" }
+    ]
+}

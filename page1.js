@@ -57,3 +57,12 @@ function supprimerElement() {
 
 // Planifier la suppression de l'élément après 10 secondes
 setTimeout(supprimerElement, 10000);
+
+// Requete 
+fetch('utilisateurs.json')
+    .then(reponse => reponse.json())
+    .then((data) => {
+        data.utilisateur.forEach(utilisateur => {
+            console.log(utilisateur.login, utilisateur.password)
+        });
+    })
