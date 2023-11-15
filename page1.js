@@ -15,15 +15,16 @@ class Utilisateur {
   }
 }
 
+ 
 connexionForm.addEventListener("submit", function (event) {
   const valeurID = identifiantInput.value;
   const valeurMDP = motdepasseInput.value;
   // Instancier un objet de la classe Utilisateur
   let nouvUtilisateur = new Utilisateur(valeurID, valeurMDP);
 
-  // Stockage des données de l'objet utilisateur dans le stockage local (localStorage)
+  // Stockage des données de l'objet utilisateur dans le stockage session (sessionStorage)
   let utilisateurStr = JSON.stringify(nouvUtilisateur);
-  localStorage.setItem("monUtilisateur", utilisateurStr);
+  sessionStorage.setItem("monUtilisateur", utilisateurStr);
 
   event.preventDefault(); // Empêche le formulaire de se soumettre normalement
   // Rediriger vers "page2.html" après 2 secondes
@@ -58,11 +59,15 @@ function supprimerElement() {
 // Planifier la suppression de l'élément après 10 secondes
 setTimeout(supprimerElement, 10000);
 
-// Requete 
+// Requete (Ne fonctionne pas)
 fetch('utilisateurs.json')
     .then(reponse => reponse.json())
     .then((data) => {
         data.utilisateur.forEach(utilisateur => {
-            console.log(utilisateur.login, utilisateur.password)
+          let localID = localStorage.getItem("ID");
+          let localMDP = localStorage.getItem("mdp");
+          if(localID === utilisateur.login) {
+          console.log("test")
+          }
         });
     })
