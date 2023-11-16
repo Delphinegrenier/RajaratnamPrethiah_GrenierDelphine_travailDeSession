@@ -35,6 +35,10 @@ div.containerDeux {
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding: 0px 40px;
+}
+
+div.containerMenu {
   width: 800px;
   height: 600px;
   margin: auto;
@@ -43,50 +47,12 @@ div.containerDeux {
   backdrop-filter: blur(50px);
   border-radius: 15px;
   box-sizing: border-box;
-  padding: 0 40px;
   color: black;
   position: relative;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
-div.containerTrois {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 800px;
-  height: 600px;
-  margin: auto;
-  background-color: rgb(235, 241, 233);
-  border: 3px #8eac8e solid;
-  backdrop-filter: blur(50px);
-  border-radius: 15px;
-  box-sizing: border-box;
-  padding: 0 40px;
-  color: black;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-}
-
-div.containerQuatre {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 800px;
-  height: 600px;
-  margin: auto;
-  background-color: rgb(235, 241, 233);
-  border: 3px #8eac8e solid;
-  backdrop-filter: blur(50px);
-  border-radius: 15px;
-  box-sizing: border-box;
-  padding: 0 40px;
-  color: black;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-}
 
 .containerInformations {
   display: flex;
@@ -266,3 +232,28 @@ p.caracteres {
 .containeroptions {
   padding-left: 3px;
 }
+
+.menu {
+  display: flex;
+  direction: row;
+  justify-content: space-between;
+  background-color: #8eac8e ;
+  padding: 0 40px;
+  margin-bottom: 40px;
+  font-weight: bold;
+}
+
+.deconnexion {
+  width: 10%;
+  border: 2px solid white;
+  color: #8eac8e;
+  margin: 0;
+}
+
+.menu svg {
+  fill: black;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+}
+

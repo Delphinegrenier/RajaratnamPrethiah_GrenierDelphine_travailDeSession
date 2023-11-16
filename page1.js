@@ -7,7 +7,6 @@ const motdepasseInput = document.querySelector("#motdepasse");
 identifiantInput.setAttribute("placeholder", "Identifiant");
 motdepasseInput.setAttribute("placeholder", "Mot de passe");
 
-// Création d'une classe Utilisateur
 class Utilisateur {
   constructor(ID, mdp) {
     this.ID = ID;
@@ -15,16 +14,33 @@ class Utilisateur {
   }
 }
 
- 
 connexionForm.addEventListener("submit", function (event) {
+  // Création d'une classe Utilisateur
+
   const valeurID = identifiantInput.value;
   const valeurMDP = motdepasseInput.value;
   // Instancier un objet de la classe Utilisateur
   let nouvUtilisateur = new Utilisateur(valeurID, valeurMDP);
 
-  // Stockage des données de l'objet utilisateur dans le stockage session (sessionStorage)
-  let utilisateurStr = JSON.stringify(nouvUtilisateur);
-  sessionStorage.setItem("monUtilisateur", utilisateurStr);
+  let sessionID = nouvUtilisateur.ID;
+  let sessionMDP = nouvUtilisateur.mdp;
+
+  // Requete (Ne fonctionne pas)
+  fetch("utilisateurs.json")
+    .then((reponse) => reponse.json())
+    .then((data) => {
+      data.utilisateur.forEach((utilisateur) => {
+        if (
+          sessionID === utilisateur.login &&
+          sessionMDP === utilisateur.password
+        ) {
+          sessionStorage.setItem("ID", valeurID);
+          sessionStorage.setItem("password", valeurMDP);
+          sessionStorage.setItem("prenom", utilisateur.prenom);
+          sessionStorage.setItem("nom", utilisateur.nom);
+        }
+      });
+    });
 
   event.preventDefault(); // Empêche le formulaire de se soumettre normalement
   // Rediriger vers "page2.html" après 2 secondes
@@ -59,15 +75,4 @@ function supprimerElement() {
 // Planifier la suppression de l'élément après 10 secondes
 setTimeout(supprimerElement, 10000);
 
-// Requete (Ne fonctionne pas)
-fetch('utilisateurs.json')
-    .then(reponse => reponse.json())
-    .then((data) => {
-        data.utilisateur.forEach(utilisateur => {
-          let localID = localStorage.getItem("ID");
-          let localMDP = localStorage.getItem("mdp");
-          if(localID === utilisateur.login) {
-          console.log("test")
-          }
-        });
-    })
+sessionStorage.setItem("Page", "Page Un");

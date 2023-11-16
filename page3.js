@@ -150,7 +150,6 @@ function afficherQuestions(cle) {
       monSondage[cle].repondre(reponseChoisie);
       afficherQuestions(monSondage[cle].destination);
       incrementerCompteur();
-
     }
     localStorage.setItem("monSondage", JSON.stringify(monSondage));
   });
@@ -161,7 +160,7 @@ function afficherQuestions(cle) {
 afficherQuestions(etapeActuelle);
 
 // Bloc 9: Création d'un compteur pour suivre le nombre de questions répondues
-let questionRemplies = document.querySelector("p");
+let questionRemplies = document.querySelector(".questionRemplies");
 questionRemplies.textContent = `Questions: 0/5`;
 
 // Bloc 10: Création d'un compteur qui permet à l'utilisateur de savoir à quelle question il se situe
@@ -174,3 +173,25 @@ let compteur = function () {
 };
 
 let incrementerCompteur = compteur();
+
+//Suit et affiche les pages que visitent les utilisateurs pendant leur session
+sessionStorage.setItem("Page", "Page Trois");
+
+// Bouton de déconnexion qui clear le session storage et local storage et renvoie à la page de connexion
+const boutonDeconnexion = document.querySelector(".deconnexion");
+boutonDeconnexion.addEventListener("click", function () {
+  sessionStorage.clear();
+  localStorage.clear();
+  window.location.href = "index.html";
+});
+
+//Afficher le nom dans le menu
+const menuAfficher = document.querySelector(".menuAfficher");
+const sessionPrenom = sessionStorage.getItem("prenom");
+const sessionNom = sessionStorage.getItem("nom");
+
+if (sessionPrenom) {
+  menuAfficher.textContent = `Bonjour : ${sessionPrenom} ${sessionNom}`;
+} else {
+  menuAfficher.textContent = `Bonjour : Nouvel Utilisateur`;
+}
