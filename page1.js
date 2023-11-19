@@ -48,15 +48,18 @@ connexionForm.addEventListener("submit", function (event) {
           sessionStorage.setItem("password", valeurMDP);
           sessionStorage.setItem("prenom", utilisateur.prenom);
           sessionStorage.setItem("nom", utilisateur.nom);
+          event.preventDefault(); // Empêche le formulaire de se soumettre normalement
+          // Rediriger vers "page2.html" après 2 secondes
+          setTimeout(function () {
+            window.location.href = "page2.html";
+          }, 2000);
+        } else {
+          alert ("Vous n'avez pas de compte avec nous. Abonnez-vous.")
+          valeurID = "";
+          valeurMDP = "";
         }
       });
     });
-
-  event.preventDefault(); // Empêche le formulaire de se soumettre normalement
-  // Rediriger vers "page2.html" après 2 secondes
-  setTimeout(function () {
-    window.location.href = "page2.html";
-  }, 2000);
 });
 
 // Gestion des événements pour le message de mot de passe invalide
