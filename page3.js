@@ -1,6 +1,8 @@
+// Vérification de la connexion de l'utilisateur avant d'accéder aux données
 const idSessionStorage = sessionStorage.getItem("ID");
-if(idSessionStorage === null){
-    window.location.href = "index.html";
+if (idSessionStorage === null) {
+  // Redirige l'utilisateur vers la page de connexion s'il n'est pas connecté
+  window.location.href = "index.html";
 }
 
 // Bloc 1: Fonction qui s'exécute une seule fois dans la vie du programme
@@ -182,9 +184,6 @@ let compteur = function () {
 
 let incrementerCompteur = compteur();
 
-//Suit et affiche les pages que visitent les utilisateurs pendant leur session
-sessionStorage.setItem("Page", "Page Trois");
-
 // Bouton de déconnexion qui clear le session storage et local storage et renvoie à la page de connexion
 const boutonDeconnexion = document.querySelector(".deconnexion");
 boutonDeconnexion.addEventListener("click", function () {
@@ -203,3 +202,6 @@ if (sessionPrenom) {
 } else {
   menuAfficher.textContent = `Bonjour : Nouvel Utilisateur`;
 }
+
+//Suit et affiche les pages que visitent les utilisateurs pendant leur session
+sessionStorage.setItem("Page", "Page Trois");

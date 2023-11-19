@@ -1,3 +1,4 @@
+//Cette fonction immédiatement invoquée (IIFE) utilise fetch pour récupérer les données du fichier "sondage.json".
 (function () {
   fetch("sondage.json")
     .then((reponse) => reponse.json())
@@ -6,7 +7,7 @@
     });
 })();
 
-// Bloc 1: Gestion de la soumission du formulaire
+// Gestion de la soumission du formulaire
 const connexionForm = document.querySelector("#connexionForm");
 
 // Récupération des éléments input et création de l'attribut placeholder
@@ -15,6 +16,7 @@ const motdepasseInput = document.querySelector("#motdepasse");
 identifiantInput.setAttribute("placeholder", "Identifiant");
 motdepasseInput.setAttribute("placeholder", "Mot de passe");
 
+//Création d'une classe Utilisateur
 class Utilisateur {
   constructor(ID, mdp) {
     this.ID = ID;
@@ -33,6 +35,7 @@ connexionForm.addEventListener("submit", function (event) {
   let sessionID = nouvUtilisateur.ID;
   let sessionMDP = nouvUtilisateur.mdp;
 
+  //Prendre les données du fichier "utilsateur.json"
   fetch("utilisateurs.json")
     .then((reponse) => reponse.json())
     .then((data) => {
@@ -56,14 +59,16 @@ connexionForm.addEventListener("submit", function (event) {
   }, 2000);
 });
 
-// Bloc 2: Gestion des événements pour le message de mot de passe invalide
+// Gestion des événements pour le message de mot de passe invalide
 const motDePasseInvalideElement = document.getElementById("motdepasseInvalide");
 
+// Fonction qui affiche un message pour avoir le minimum requis
 function afficherMessage() {
   motDePasseInvalideElement.textContent =
     "Veuillez vérifier si vous avez le minimum requis!";
 }
 
+// Fonction qui affiche un message pour avoir le minimum requis
 function masquerMessage() {
   motDePasseInvalideElement.textContent =
     "Vous devez avoir 8 caractères et au moins un chiffre";
@@ -82,4 +87,5 @@ function supprimerElement() {
 // Planifier la suppression de l'élément après 10 secondes
 setTimeout(supprimerElement, 10000);
 
+// Acffiche dans le sessionStorage la page affiché
 sessionStorage.setItem("Page", "Page Un");

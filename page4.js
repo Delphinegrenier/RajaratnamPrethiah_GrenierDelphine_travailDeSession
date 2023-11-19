@@ -1,8 +1,11 @@
+// Vérification de la connexion de l'utilisateur avant d'accéder aux données
 const idSessionStorage = sessionStorage.getItem("ID");
 if (idSessionStorage === null) {
+  // Redirige l'utilisateur vers la page de connexion s'il n'est pas connecté
   window.location.href = "index.html";
 }
 
+// Récupération des données existantes depuis le stockage local et ajout de nouvelles valeurs à un objet 'donnees'
 let donnees = JSON.parse(localStorage.getItem("donnees"));
 const monSondage = JSON.parse(localStorage.getItem("monSondage"));
 donnees.sondage.push({
@@ -14,31 +17,28 @@ donnees.sondage.push({
 });
 localStorage.setItem("donnees", JSON.stringify(donnees));
 
-// Importer les objets stockés depuis le stockage local (localStorage)
-// Récupération de l'objet utilisateur préalablement stocké
-
+// Récupération et affichage des objets stockés dans la console et sur la page
 let monSondageStrStocker = localStorage.getItem("monSondage");
 let monSondageStocker = JSON.parse(monSondageStrStocker);
-
-// Affichage des objets récupérés dans la console
 console.log("Sondage:", monSondageStocker);
 
-// Affichage des éléments stockés dans la page
+// Affichage des éléments récupérés sur la page
+// Affichage du nom de l'utilisateur dans le titre et récupération des données de sondage
 const salutationH2 = document.querySelector("#salutation");
 const choixUl = document.querySelector("#vosChoix");
 const nomNode = document.createTextNode(sessionStorage.getItem("ID"));
 salutationH2.appendChild(nomNode);
 const ajoutDonnees = JSON.parse(localStorage.getItem("donnees"));
-console.log(ajoutDonnees);
+
+// Boucle pour afficher les choix de l'utilisateur et les statistiques associées
 for (let item in monSondageStocker) {
   const nouvLi = document.createElement("li");
   const choixNode = document.createTextNode("Votre choix de " + item + ": ");
   const reponseEnGras = document.createElement("strong");
   let nbrItemsPareil = 0;
   let nbrItemsDifferent = 0;
-  console.log(monSondageStocker[item].reponse);
+
   for (let i = 0; i < ajoutDonnees.sondage.length; i++) {
-    console.log(ajoutDonnees.sondage[i][item]);
     if (ajoutDonnees.sondage[i][item] === monSondageStocker[item].reponse) {
       nbrItemsPareil++;
     } else {
@@ -46,18 +46,21 @@ for (let item in monSondageStocker) {
     }
   }
 
-  const stat = parseInt((nbrItemsPareil / (nbrItemsDifferent + nbrItemsPareil)) * 100);
+  // Calcul des statistiques basées sur les choix des utilisateurs
+  const stat = parseInt(
+    (nbrItemsPareil / (nbrItemsDifferent + nbrItemsPareil)) * 100
+  );
   reponseEnGras.textContent =
     monSondageStocker[item].reponse +
-    " " +
+    " et " +
     stat +
-    "% des clients ont fait ce choix!";
+    "% de nos clients ont fait le même choix que vous!";
   nouvLi.appendChild(choixNode);
   nouvLi.appendChild(reponseEnGras);
   choixUl.appendChild(nouvLi);
 }
 
-//Affichage dans la console les réponses
+// Affichage des réponses spécifiques à chaque question dans la console
 console.log("Réponse à la question base:", monSondageStocker.base.reponse);
 console.log(
   "Réponse à la question garniture:",
@@ -70,10 +73,10 @@ console.log(
   monSondageStocker.frequence.reponse
 );
 
-//Suit et affiche les pages que visitent les utilisateurs pendant leur session
+// Enregistre la page actuelle visitée par l'utilisateur dans sessionStorage
 sessionStorage.setItem("Page", "Page Quatre");
 
-// Bouton de déconnexion qui clear le session storage et local storage et renvoie à la page de connexion
+// Fonctionnalité de déconnexion qui efface les données de session et redirige vers la page de connexion
 const boutonDeconnexion = document.querySelector(".deconnexion");
 boutonDeconnexion.addEventListener("click", function () {
   sessionStorage.clear();
@@ -81,7 +84,7 @@ boutonDeconnexion.addEventListener("click", function () {
   window.location.href = "index.html";
 });
 
-//Afficher le nom dans le menu
+// Affiche le nom de l'utilisateur dans le menu s'il est connecté
 const menuAfficher = document.querySelector(".menuAfficher");
 const sessionPrenom = sessionStorage.getItem("prenom");
 const sessionNom = sessionStorage.getItem("nom");
