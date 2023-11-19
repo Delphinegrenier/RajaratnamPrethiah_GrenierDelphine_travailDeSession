@@ -1,3 +1,7 @@
+const idSessionStorage = sessionStorage.getItem("ID");
+if(idSessionStorage === null){
+    window.location.href = "index.html";
+}
 // Définition de la classe Informations
 class Informations {
   constructor() {

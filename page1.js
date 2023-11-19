@@ -1,3 +1,11 @@
+(function () {
+  fetch("sondage.json")
+    .then((reponse) => reponse.json())
+    .then((data) => {
+      localStorage.setItem("donnees", JSON.stringify(data));
+    });
+})();
+
 // Bloc 1: Gestion de la soumission du formulaire
 const connexionForm = document.querySelector("#connexionForm");
 
@@ -25,7 +33,6 @@ connexionForm.addEventListener("submit", function (event) {
   let sessionID = nouvUtilisateur.ID;
   let sessionMDP = nouvUtilisateur.mdp;
 
-  // Requete (Ne fonctionne pas)
   fetch("utilisateurs.json")
     .then((reponse) => reponse.json())
     .then((data) => {

@@ -1,3 +1,8 @@
+const idSessionStorage = sessionStorage.getItem("ID");
+if(idSessionStorage === null){
+    window.location.href = "index.html";
+}
+
 // Bloc 1: Fonction qui s'exécute une seule fois dans la vie du programme
 (function () {
   const alerteSondage =
@@ -151,7 +156,10 @@ function afficherQuestions(cle) {
       afficherQuestions(monSondage[cle].destination);
       incrementerCompteur();
     }
+
     localStorage.setItem("monSondage", JSON.stringify(monSondage));
+ 
+
   });
   containerBoutons.appendChild(continuerBtn);
 }
