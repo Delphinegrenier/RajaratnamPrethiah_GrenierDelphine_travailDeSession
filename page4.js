@@ -46,7 +46,7 @@ for (let item in monSondageStocker) {
     }
   }
 
-  const stat = (nbrItemsPareil / (nbrItemsDifferent + nbrItemsPareil)) * 100;
+  const stat = parseInt((nbrItemsPareil / (nbrItemsDifferent + nbrItemsPareil)) * 100);
   reponseEnGras.textContent =
     monSondageStocker[item].reponse +
     " " +
