@@ -1,6 +1,14 @@
 {
     "utilisateur" : [
-    {"login" : "MammouthP", "password" : "allo1234", "prenom": "Mammouth", "nom" : "Poilu"},
-    {"login" : "DauphinP", "password" : "a1111111", "prenom": "Dauphin", "nom" : "Poilu"}
+    {"login" : "EmmaTremblay", "password" : "emmatremblay2005", "prenom": "Emma", "nom" : "Tremblay"},
+    {"login" : "NoahGagnon", "password" : "noahgagnon2002", "prenom": "Noah", "nom" : "Gagnon"},
+    {"login" : "OliviaParent", "password" : "oliviaparent1998", "prenom": "Olivia", "nom" : "Parent"},
+    {"login" : "WiliamRoy", "password" : "williamroy2008", "prenom": "William", "nom" : "Roy"},
+    {"login" : "CharlotteBouchard", "password" : "charlottebouchard2012", "prenom": "Charlotte", "nom" : "Bouchard"},
+    {"login" : "LiamPelletier", "password" : "liampelletier2001", "prenom": "Liam", "nom" : "Pelletier"},
+    {"login" : "CharlieSimard", "password" : "charliesimard1992", "prenom": "Charlie", "nom" : "Simard"},
+    {"login" : "ThomasFortin", "password" : "thomasfortin1980", "prenom": "Thomas", "nom" : "Fortin"},
+    {"login" : "FlorenceLavoie", "password" : "florencelavoie1999", "prenom": "Florence", "nom" : "Lavoie"},
+    {"login" : "JacobMorin", "password" : "jacobmorin1997", "prenom": "Jacob", "nom" : "Morin"}
     ]
 }
