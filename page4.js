@@ -93,3 +93,15 @@ if (sessionPrenom) {
 } else {
   menuAfficher.textContent = `Bonjour : Nouvel Utilisateur`;
 }
+
+// Une alerte pour indiquer à l'utilisateur que le sondage est terminé
+(function () {
+  const alerteSondage =
+    "Merci d'avoir participé à notre sondage" +
+    " " +
+    sessionPrenom +
+    " " +
+    sessionNom +
+    " !";
+  alert(alerteSondage);
+})();
