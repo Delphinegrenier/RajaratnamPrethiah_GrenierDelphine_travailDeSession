@@ -25,10 +25,10 @@ class Utilisateur {
 }
 
 connexionForm.addEventListener("submit", function (event) {
+  event.preventDefault(); // Empêche le formulaire de se soumettre normalement
   // Création d'une classe Utilisateur
-
-  const valeurID = identifiantInput.value;
-  const valeurMDP = motdepasseInput.value;
+  let valeurID = identifiantInput.value;
+  let valeurMDP = motdepasseInput.value;
   // Instancier un objet de la classe Utilisateur
   let nouvUtilisateur = new Utilisateur(valeurID, valeurMDP);
 
@@ -48,19 +48,21 @@ connexionForm.addEventListener("submit", function (event) {
           sessionStorage.setItem("password", valeurMDP);
           sessionStorage.setItem("prenom", utilisateur.prenom);
           sessionStorage.setItem("nom", utilisateur.nom);
-          event.preventDefault(); // Empêche le formulaire de se soumettre normalement
-          // Rediriger vers "page2.html" après 2 secondes
-          setTimeout(function () {
-            window.location.href = "page2.html";
-          }, 2000);
+          fctSTO();
         } else {
-          alert ("Vous n'avez pas de compte avec nous. Abonnez-vous.")
-          valeurID = "";
-          valeurMDP = "";
+          identifiantInput.value = "";
+          motdepasseInput.value = "";
         }
       });
     });
 });
+
+// Rediriger vers "page2.html" après 2 secondes (fonction de fermeture)
+const fctSTO = function () {
+  return setTimeout(function () {
+    window.location.href = "page2.html";
+  }, 2000);
+};
 
 // Gestion des événements pour le message de mot de passe invalide
 const motDePasseInvalideElement = document.getElementById("motdepasseInvalide");
