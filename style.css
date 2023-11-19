@@ -163,7 +163,7 @@ button {
 }
 
 button:hover {
-  background-color: var(--gris);
+  background-color: var(--vertpale);
   transition-duration: 0.2s;
   transition-timing-function: ease-in;
 }

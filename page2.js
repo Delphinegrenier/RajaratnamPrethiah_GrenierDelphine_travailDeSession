@@ -1,6 +1,10 @@
 // Vérification de la connexion de l'utilisateur avant d'accéder aux données
 const idSessionStorage = sessionStorage.getItem("ID");
 if (idSessionStorage === null) {
+  (function () {
+    const alerteConnection = "Vous n'avez pas de compte! Abonnez-vous!";
+    alert(alerteConnection);
+  })();
   // Redirige l'utilisateur vers la page de connexion s'il n'est pas connecté
   window.location.href = "index.html";
 }
