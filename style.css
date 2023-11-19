@@ -253,3 +253,7 @@ p.caracteres {
   height: 20px;
   margin-top: 2px;
 }
+
+.menuAfficher {
+  color: var(--blanc)
+}
