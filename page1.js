@@ -39,6 +39,7 @@ connexionForm.addEventListener("submit", function (event) {
   fetch("utilisateurs.json")
     .then((reponse) => reponse.json())
     .then((data) => {
+      estReconnu = false;
       data.utilisateur.forEach((utilisateur) => {
         if (
           sessionID === utilisateur.login &&
@@ -48,21 +49,22 @@ connexionForm.addEventListener("submit", function (event) {
           sessionStorage.setItem("password", valeurMDP);
           sessionStorage.setItem("prenom", utilisateur.prenom);
           sessionStorage.setItem("nom", utilisateur.nom);
-          fctSTO();
-        } else {
-          identifiantInput.value = "";
-          motdepasseInput.value = "";
+          estReconnu = true;
         }
       });
+      if (estReconnu) {
+        // Rediriger vers "page2.html" après 2 secondes (fonction de fermeture)
+        setTimeout(function () {
+          window.location.href = "page2.html";
+        }, 2000);
+      } else {
+        identifiantInput.value = "";
+        motdepasseInput.value = "";
+        alert("Veuillez vous abonnez !");
+      }
     });
 });
 
-// Rediriger vers "page2.html" après 2 secondes (fonction de fermeture)
-const fctSTO = function () {
-  return setTimeout(function () {
-    window.location.href = "page2.html";
-  }, 2000);
-};
 
 // Gestion des événements pour le message de mot de passe invalide
 const motDePasseInvalideElement = document.getElementById("motdepasseInvalide");
