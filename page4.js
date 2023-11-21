@@ -90,8 +90,6 @@ const sessionPrenom = sessionStorage.getItem("prenom");
 const sessionNom = sessionStorage.getItem("nom");
 if (sessionPrenom) {
   menuAfficher.textContent = `Bonjour : ${sessionPrenom} ${sessionNom}`;
-} else {
-  menuAfficher.textContent = `Bonjour : Nouvel Utilisateur`;
 }
 
 // Une alerte pour indiquer à l'utilisateur que le sondage est terminé

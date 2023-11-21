@@ -60,8 +60,6 @@ const sessionNom = sessionStorage.getItem("nom");
 
 if (sessionPrenom) {
   menuAfficher.textContent = `Bonjour : ${sessionPrenom} ${sessionNom}`;
-} else {
-  menuAfficher.textContent = `Bonjour : Nouvel Utilisateur`;
 }
 
 //Suit et affiche les pages que visitent les utilisateurs pendant leur session
