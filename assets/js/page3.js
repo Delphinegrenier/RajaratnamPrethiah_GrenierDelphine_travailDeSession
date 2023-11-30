@@ -5,12 +5,13 @@ if (idSessionStorage === null) {
   window.location.href = "index.html";
 }
 
-// Bloc 1: Fonction qui s'exécute une seule fois dans la vie du programme
-(function () {
+// Bloc 1: Fonction qui s'exécute une seule fois dans la vie du programme et souhaite bonne chance aux utilsateurs
+(() => {
   const alerteSondage =
     "Rejoignez notre sondage en partageant vos saveurs préférées, vos combinaisons de perles incontournables et bien plus encore. Votre opinion est précieuse pour nous. Bon sondage!";
   alert(alerteSondage);
 })();
+
 
 // Bloc 2: Création de classes pour définir les questions du sondage
 class DerniereQuestion {
@@ -19,7 +20,6 @@ class DerniereQuestion {
     this.options = options;
     this.reponse = "null";
   }
-
   repondre(reponse) {
     this.reponse = reponse;
   }
@@ -32,7 +32,7 @@ class Question extends DerniereQuestion {
   }
 }
 
-// Bloc 3: Instances des classes pour définir les questions, réponses et destinations
+// Bloc 3: Instances des classes pour définir les questions, réponses et destinations (les 5 questions du sondage)
 const base = new Question(
   "Quelle base préférez-vous pour votre thé?",
   ["Thé", "Lait", "Jus"],
@@ -132,24 +132,24 @@ function afficherQuestions(cle) {
   continuerBtn.textContent = "Continuer";
 
   // Ajouter un gestionnaire d'événements au bouton "Continuer"
-  continuerBtn.addEventListener("click", function () {
+  continuerBtn.addEventListener("click", () => {
     if (!optionSelectionnee) {
       // Fonction d'ordre supérieur pour afficher une alerte et un message
-      function afficherAlerte(message, fonctionAlerte) {
+      const afficherAlerte = (message, fonctionAlerte) => {
         let monMessage = `Veuillez sélectionner ${message} avant de continuer`;
         fonctionAlerte(monMessage);
-      }
-
-      function alerte(message) {
+      };
+  
+      const alerte = (message) => {
         alert(message);
-      }
-
+      };
+  
       afficherAlerte("une option", alerte);
     } else if (cle === "frequence") {
       // Si c'est la dernière question, redirige vers la dernière page (page4.html) après un délai de 2 secondes
-      setTimeout(function () {
+      setTimeout(() => {
         window.location.href = "page4.html";
-      }, 2000);
+      }, 2000);      
       questionRemplies.textContent = `Sondage terminé !`;
       monSondage[cle].repondre(reponseChoisie);
     } else {
@@ -158,9 +158,10 @@ function afficherQuestions(cle) {
       afficherQuestions(monSondage[cle].destination);
       incrementerCompteur();
     }
-
+  
     localStorage.setItem("monSondage", JSON.stringify(monSondage));
   });
+  
   containerBoutons.appendChild(continuerBtn);
 }
 
@@ -172,9 +173,9 @@ let questionRemplies = document.querySelector(".questionRemplies");
 questionRemplies.textContent = `Questions: 0/5`;
 
 // Bloc 10: Création d'un compteur qui permet à l'utilisateur de savoir à quelle question il se situe
-let compteur = function () {
+let compteur = () => {
   let nombreQuestions = 0;
-  return function () {
+  return () => {
     nombreQuestions++;
     questionRemplies.textContent = `Questions: ${nombreQuestions}/5`;
   };
@@ -184,13 +185,14 @@ let incrementerCompteur = compteur();
 
 // Bouton de déconnexion qui clear le session storage et local storage et renvoie à la page de connexion
 const boutonDeconnexion = document.querySelector(".deconnexion");
-boutonDeconnexion.addEventListener("click", function () {
+boutonDeconnexion.addEventListener("click", () => {
   sessionStorage.clear();
   localStorage.clear();
   window.location.href = "index.html";
 });
 
-//Afficher le nom dans le menu
+
+//Afficher le nom dans le menu pour montrer à l'utilsateur qu'il est connecté
 const menuAfficher = document.querySelector(".menuAfficher");
 const sessionPrenom = sessionStorage.getItem("prenom");
 const sessionNom = sessionStorage.getItem("nom");

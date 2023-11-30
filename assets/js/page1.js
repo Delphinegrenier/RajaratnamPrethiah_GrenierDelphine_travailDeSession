@@ -1,5 +1,5 @@
 // Cette fonction immédiatement invoquée (IIFE) utilise fetch pour récupérer les données du fichier "sondage.json" et les stocke dans le stockage local du navigateur.
-(function () {
+(() => {
   fetch("sondage.json")
     .then((reponse) => reponse.json())
     .then((data) => {
@@ -10,13 +10,13 @@
 // Gestion de la soumission du formulaire
 const connexionForm = document.querySelector("#connexionForm");
 
-// Récupération des éléments input et création de l'attribut placeholder
+//  Bloc 1: Récupération des éléments input et création de l'attribut placeholder
 const identifiantInput = document.querySelector("#identifiant");
 const motdepasseInput = document.querySelector("#motdepasse");
 identifiantInput.setAttribute("placeholder", "Identifiant");
 motdepasseInput.setAttribute("placeholder", "Mot de passe");
 
-//Création d'une classe Utilisateur
+// Bloc 2: Création d'une classe Utilisateur
 class Utilisateur {
   constructor(ID, mdp) {
     this.ID = ID;
@@ -35,7 +35,7 @@ connexionForm.addEventListener("submit", function (event) {
   let sessionID = nouvUtilisateur.ID;
   let sessionMDP = nouvUtilisateur.mdp;
 
-  //Prendre les données du fichier "utilsateur.json"
+  //Bloc 3: Prendre les données du fichier "utilsateur.json"
   fetch("utilisateurs.json")
     .then((reponse) => reponse.json())
     .then((data) => {
@@ -54,7 +54,7 @@ connexionForm.addEventListener("submit", function (event) {
       });
       if (estReconnu) {
         // Rediriger vers "page2.html" après 2 secondes (fonction de fermeture)
-        setTimeout(function () {
+        setTimeout(() => {
           window.location.href = "page2.html";
         }, 2000);
       } else {
@@ -65,31 +65,29 @@ connexionForm.addEventListener("submit", function (event) {
     });
 });
 
-
-// Gestion des événements pour le message de mot de passe invalide
+// Bloc 4: Gestion des événements pour le message de mot de passe invalide
 const motDePasseInvalideElement = document.getElementById("motdepasseInvalide");
 
-// Fonction qui affiche un message pour avoir le minimum requis
-function afficherMessage() {
+// Fonction fléchée qui affiche un message pour avoir le minimum requis
+const afficherMessage = () => {
   motDePasseInvalideElement.textContent =
     "Veuillez vérifier si vous avez le minimum requis!";
-}
+};
 
-// Fonction qui affiche un message pour avoir le minimum requis
-function masquerMessage() {
+// Fonction fléchée qui affiche un message pour avoir le minimum requis
+const masquerMessage = () => {
   motDePasseInvalideElement.textContent =
     "Vous devez avoir 8 caractères et au moins un chiffre";
-}
+};
 
-// Ajout d'événements pour afficher et masquer le message en survolant l'élément
+// Bloc 5: Ajout d'événements pour afficher et masquer le message en survolant l'élément
 motDePasseInvalideElement.addEventListener("mouseover", afficherMessage);
 motDePasseInvalideElement.addEventListener("mouseout", masquerMessage);
 
-// Bloc 3: Suppression de l'élément p (mot de passe invalide) après 10 secondes
-function supprimerElement() {
-  // Supprimer l'élément du DOM (Document Object Model)
+// Bloc 6: Fonction fléchée qui supprime l'élément du DOM (Document Object Model)
+const supprimerElement = () => {
   motDePasseInvalideElement.parentNode.removeChild(motDePasseInvalideElement);
-}
+};
 
 // Planifier la suppression de l'élément après 10 secondes
 setTimeout(supprimerElement, 10000);

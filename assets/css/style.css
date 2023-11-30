@@ -1,3 +1,4 @@
+/* Création d'un root pour facilier la lecture des couleurs*/
 :root {
   --noir: #000000;
   --blanc: #ffffff;
@@ -5,12 +6,13 @@
   --vertpale: #c1dbbf;
   --vert: #8eac8e;
 }
-
+/* Ajout de font*/
 @font-face {
   font-family: Varela;
   src: url(/assets/font/VarelaRound-Regular.ttf) format("truetype");
 }
 
+/* Style de base pour le body*/
 body {
   min-height: 100vh;
   display: flex;
@@ -230,7 +232,7 @@ p.caracteres {
 .containeroptions {
   padding-left: 3px;
 }
-
+/*Style pour le menu et son contenu*/
 .menu {
   display: flex;
   direction: row;
@@ -239,12 +241,6 @@ p.caracteres {
   padding: 0 40px;
   margin-bottom: 40px;
   font-weight: bold;
-}
-
-.deconnexion {
-  width: 10%;
-  color: var(--vert);
-  margin: 0;
 }
 
 .menu svg {
@@ -257,3 +253,11 @@ p.caracteres {
 .menuAfficher {
   color: var(--blanc)
 }
+
+/*Style pour le bouton déconnection*/
+.deconnexion {
+  width: 10%;
+  color: var(--vert);
+  margin: 0;
+}
+
