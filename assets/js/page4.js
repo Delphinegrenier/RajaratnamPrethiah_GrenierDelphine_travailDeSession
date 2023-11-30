@@ -1,13 +1,13 @@
 // Vérification de la connexion de l'utilisateur avant d'accéder aux données
 const idSessionStorage = sessionStorage.getItem("ID");
 if (idSessionStorage === null) {
-  // Redirige l'utilisateur vers la page de connexion s'il n'est pas connecté
+  // Redirection vers la page de connexion si l'utilisateur n'est pas connecté
   window.location.href = "index.html";
 }
 
-// Récupération des données existantes depuis le stockage local et ajout de nouvelles valeurs à un objet 'donnees'
+// Mise à jour des données existantes en local avec de nouvelles valeurs issues du sondage
 let donnees = JSON.parse(localStorage.getItem("donnees"));
-const monSondage = JSON.parse(localStorage.getItem("monSondage"));
+const monSondage= JSON.parse(localStorage.getItem("monSondage"));
 donnees.sondage.push({
   base: monSondage.base.reponse,
   garniture: monSondage.garniture.reponse,
@@ -92,7 +92,7 @@ if (sessionPrenom) {
   menuAfficher.textContent = `Bonjour : ${sessionPrenom} ${sessionNom}`;
 }
 
-// Une alerte pour indiquer à l'utilisateur que le sondage est terminé
+// Message d'alerte pour informer l'utilisateur que le sondage est terminé
 (function () {
   const alerteSondage =
     "Merci d'avoir participé à notre sondage" +

@@ -1,4 +1,4 @@
-//Cette fonction immédiatement invoquée (IIFE) utilise fetch pour récupérer les données du fichier "sondage.json".
+// Cette fonction immédiatement invoquée (IIFE) utilise fetch pour récupérer les données du fichier "sondage.json" et les stocke dans le stockage local du navigateur.
 (function () {
   fetch("sondage.json")
     .then((reponse) => reponse.json())
