@@ -1,3 +1,4 @@
+// Importe deux fonctions, deconnexionFct depuis le fichier 'deconnexion.js' et verificationFct depuis 'verification.js'. Ensuite, il appelle ces deux fonctions.
 import { deconnexionFct } from './deconnexion.js';
 import { verificationFct } from './verification.js';
 deconnexionFct();
