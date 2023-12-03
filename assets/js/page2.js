@@ -24,7 +24,7 @@ class Informations {
     // Ajout d'un écouteur d'événement sur le bouton "Commencer"
     this.commencerBouton.addEventListener("click", () => {
       // Rediriger vers "page3.html" après 2 secondes
-      setTimeout(function () {
+      setTimeout(() => {
         window.location.href = "page3.html";
       }, 2000);
     });
