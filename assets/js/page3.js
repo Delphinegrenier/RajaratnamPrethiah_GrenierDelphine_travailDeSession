@@ -1,9 +1,16 @@
-// Vérification de la connexion de l'utilisateur avant d'accéder aux données
-const idSessionStorage = sessionStorage.getItem("ID");
-if (idSessionStorage === null) {
-  // Redirige l'utilisateur vers la page de connexion s'il n'est pas connecté
-  window.location.href = "index.html";
-}
+import { deconnexionFct } from './deconnexion.js';
+import { verificationFct } from './verification.js';
+deconnexionFct();
+verificationFct();
+
+// Cette fonction immédiatement invoquée (IIFE) utilise fetch pour récupérer les données du fichier "sondage.json" et les stocke dans le stockage local du navigateur.
+(() => {
+  fetch("sondage.json")
+    .then((reponse) => reponse.json())
+    .then((data) => {
+      localStorage.setItem("donnees", JSON.stringify(data));
+    });
+})();
 
 // Bloc 1: Fonction qui s'exécute une seule fois dans la vie du programme et souhaite bonne chance aux utilsateurs
 (() => {
@@ -11,7 +18,6 @@ if (idSessionStorage === null) {
     "Rejoignez notre sondage en partageant vos saveurs préférées, vos combinaisons de perles incontournables et bien plus encore. Votre opinion est précieuse pour nous. Bon sondage!";
   alert(alerteSondage);
 })();
-
 
 // Bloc 2: Création de classes pour définir les questions du sondage
 class DerniereQuestion {
@@ -139,17 +145,17 @@ function afficherQuestions(cle) {
         let monMessage = `Veuillez sélectionner ${message} avant de continuer`;
         fonctionAlerte(monMessage);
       };
-  
+
       const alerte = (message) => {
         alert(message);
       };
-  
+
       afficherAlerte("une option", alerte);
     } else if (cle === "frequence") {
       // Si c'est la dernière question, redirige vers la dernière page (page4.html) après un délai de 2 secondes
       setTimeout(() => {
         window.location.href = "page4.html";
-      }, 2000);      
+      }, 2000);
       questionRemplies.textContent = `Sondage terminé !`;
       monSondage[cle].repondre(reponseChoisie);
     } else {
@@ -158,10 +164,10 @@ function afficherQuestions(cle) {
       afficherQuestions(monSondage[cle].destination);
       incrementerCompteur();
     }
-  
+
     localStorage.setItem("monSondage", JSON.stringify(monSondage));
   });
-  
+
   containerBoutons.appendChild(continuerBtn);
 }
 
@@ -183,15 +189,6 @@ let compteur = () => {
 
 let incrementerCompteur = compteur();
 
-// Bouton de déconnexion qui clear le session storage et local storage et renvoie à la page de connexion
-const boutonDeconnexion = document.querySelector(".deconnexion");
-boutonDeconnexion.addEventListener("click", () => {
-  sessionStorage.clear();
-  localStorage.clear();
-  window.location.href = "index.html";
-});
-
-
 //Afficher le nom dans le menu pour montrer à l'utilsateur qu'il est connecté
 const menuAfficher = document.querySelector(".menuAfficher");
 const sessionPrenom = sessionStorage.getItem("prenom");
@@ -200,6 +197,3 @@ const sessionNom = sessionStorage.getItem("nom");
 if (sessionPrenom) {
   menuAfficher.textContent = `Bonjour : ${sessionPrenom} ${sessionNom}`;
 }
-
-//Suit et affiche les pages que visitent les utilisateurs pendant leur session
-sessionStorage.setItem("Page", "Page Trois");

@@ -251,7 +251,7 @@ p.caracteres {
 }
 
 .menuAfficher {
-  color: var(--blanc)
+  color: var(--blanc);
 }
 
 /*Style pour le bouton déconnection*/
@@ -260,4 +260,3 @@ p.caracteres {
   color: var(--vert);
   margin: 0;
 }
-

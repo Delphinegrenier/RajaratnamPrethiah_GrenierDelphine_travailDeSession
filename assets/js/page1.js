@@ -1,12 +1,3 @@
-// Cette fonction immédiatement invoquée (IIFE) utilise fetch pour récupérer les données du fichier "sondage.json" et les stocke dans le stockage local du navigateur.
-(() => {
-  fetch("sondage.json")
-    .then((reponse) => reponse.json())
-    .then((data) => {
-      localStorage.setItem("donnees", JSON.stringify(data));
-    });
-})();
-
 // Gestion de la soumission du formulaire
 const connexionForm = document.querySelector("#connexionForm");
 
@@ -92,5 +83,4 @@ const supprimerElement = () => {
 // Planifier la suppression de l'élément après 10 secondes
 setTimeout(supprimerElement, 10000);
 
-// Acffiche dans le sessionStorage la page affiché
-sessionStorage.setItem("Page", "Page Un");
+localStorage.clear();

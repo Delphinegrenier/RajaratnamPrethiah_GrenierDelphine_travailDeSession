@@ -1,13 +1,11 @@
-// Vérification de la connexion de l'utilisateur avant d'accéder aux données
-const idSessionStorage = sessionStorage.getItem("ID");
-if (idSessionStorage === null) {
-  // Redirection vers la page de connexion si l'utilisateur n'est pas connecté
-  window.location.href = "index.html";
-}
+import { deconnexionFct } from "./deconnexion.js";
+import { verificationFct } from './verification.js';
+deconnexionFct();
+verificationFct();
 
 // Bloc 1: Mise à jour des données existantes en local avec de nouvelles valeurs issues du sondage
 let donneesAjoutes = JSON.parse(localStorage.getItem("donnees"));
-const monSondage= JSON.parse(localStorage.getItem("monSondage"));
+const monSondage = JSON.parse(localStorage.getItem("monSondage"));
 donneesAjoutes.sondage.push({
   base: monSondage.base.reponse,
   garniture: monSondage.garniture.reponse,
@@ -40,7 +38,10 @@ for (let itemChoisi in monSondageStocker) {
   let nbrItemsDifferent = 0;
 
   for (let i = 0; i < ajoutDonneesNouvelles.sondage.length; i++) {
-    if (ajoutDonneesNouvelles.sondage[i][itemChoisi] === monSondageStocker[itemChoisi].reponse) {
+    if (
+      ajoutDonneesNouvelles.sondage[i][itemChoisi] ===
+      monSondageStocker[itemChoisi].reponse
+    ) {
       nbrItemsPareil++;
     } else {
       nbrItemsDifferent++;
@@ -51,7 +52,7 @@ for (let itemChoisi in monSondageStocker) {
   const stat = parseInt(
     (nbrItemsPareil / (nbrItemsDifferent + nbrItemsPareil)) * 100
   );
-reponseEnGras.textContent = `${monSondageStocker[itemChoisi].reponse} et ${stat}% de nos clients ont fait le même choix que vous!`;
+  reponseEnGras.textContent = `${monSondageStocker[itemChoisi].reponse} et ${stat}% de nos clients ont fait le même choix que vous!`;
   nouvLi.appendChild(choixNode);
   nouvLi.appendChild(reponseEnGras);
   choixUl.appendChild(nouvLi);
@@ -70,15 +71,6 @@ console.log(
   monSondageStocker.frequence.reponse
 );
 
-// Fonctionnalité de déconnexion qui efface les données de session et redirige vers la page de connexion
-const boutonDeconnexion = document.querySelector(".deconnexion");
-boutonDeconnexion.addEventListener("click", () => {
-  sessionStorage.clear();
-  localStorage.clear();
-  window.location.href = "index.html";
-});
-
-
 // Affiche le nom de l'utilisateur dans le menu s'il est connecté
 const menuAfficher = document.querySelector(".menuAfficher");
 const sessionPrenom = sessionStorage.getItem("prenom");
@@ -87,8 +79,6 @@ if (sessionPrenom) {
   menuAfficher.textContent = `Bonjour : ${sessionPrenom} ${sessionNom}`;
 }
 
-// Enregistre la page actuelle visitée par l'utilisateur dans sessionStorage
-sessionStorage.setItem("Page", "Page Quatre");
 // Message d'alerte pour informer l'utilisateur que le sondage est terminé
 (() => {
   const alerteSondage = `Merci d'avoir participé à notre sondage ${sessionPrenom} ${sessionNom} !`;
