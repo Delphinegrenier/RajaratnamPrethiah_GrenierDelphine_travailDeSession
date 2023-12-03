@@ -1,6 +1,6 @@
 // Importe deux fonctions, deconnexionFct depuis le fichier 'deconnexion.js' et verificationFct depuis 'verification.js'. Ensuite, il appelle ces deux fonctions.
 import { deconnexionFct } from "./deconnexion.js";
-import { verificationFct } from './verification.js';
+import { verificationFct } from "./verification.js";
 deconnexionFct();
 verificationFct();
 
@@ -85,4 +85,3 @@ if (sessionPrenom) {
   const alerteSondage = `Merci d'avoir participé à notre sondage ${sessionPrenom} ${sessionNom} !`;
   alert(alerteSondage);
 })();
-

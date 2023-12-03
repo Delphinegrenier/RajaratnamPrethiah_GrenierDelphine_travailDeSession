@@ -6,6 +6,6 @@ function deconnexionFct() {
     localStorage.clear();
     window.location.href = "index.html";
   });
-};
+}
 //Exportation de deconnectionFct dans les autres pages js
 export { deconnexionFct };
